@@ -1,0 +1,4 @@
+argparse==1.2.1
+git+https://git@github.com/mouseratti/py-asterisk#egg=py-Asterisk
+ipdb
+mysql-python

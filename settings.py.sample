@@ -1,0 +1,39 @@
+import os
+APP_PATH =  os.path.dirname(__file__)
+
+SETTINGS = {
+    "MODULES": (
+        "Cdr",
+    ),
+    "LOGFILE": APP_PATH + "/logs/app.log",
+    "PIDFILE": APP_PATH + "/app.pid",
+    "LOGLEVEL": "INFO",
+}
+
+AMI_SETTINGS = {
+    "host": "10.10.12.2",
+    "port": 5038,
+    "login": "admin",
+    "password": "password",
+}
+
+MYSQL_SETTINGS = {
+    "host": "localhost",
+    "port": 3306,
+    "user": "root",
+    "password": "rootpwd",
+    "dbname": "asterisk",
+}
+
+MYSQL_MAPPING = {
+    'LastApplication': 'lastapp',
+    'BillableSeconds': 'billsec',
+    'Source': 'src',
+    'Destination': 'dst',
+    'DestinationChannel': 'dstchannel',
+    'DestinationContext': 'dcontext',
+    'StartTime': 'calldate',
+    'CallerID': 'clid',
+    'RecordingFile': 'recordingfile',
+    'UniqueID': 'uniqueid',
+}

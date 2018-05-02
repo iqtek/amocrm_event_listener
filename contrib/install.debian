@@ -1,0 +1,10 @@
+#!/bin/sh
+
+apt-get install libmysqlclient-dev screen mysql
+apt-get install python-dev python-pip
+
+
+pip install virtualenv
+virtualenv venv
+source venv/bin/activate
+pip install -r ./requirements.txt

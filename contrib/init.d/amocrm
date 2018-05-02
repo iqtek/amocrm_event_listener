@@ -1,0 +1,61 @@
+#!/bin/bash
+# /etc/init.d/amocrm
+
+### BEGIN INIT INFO
+# INIT INFO
+# Provides:   amocrm
+# Required-Start: $local_fs $remote_fs
+# Required-Stop:  $local_fs $remote_fs
+# Should-Start:   $network mysql
+# Should-Stop:    $network
+# Default-Start:  2 3 4 5
+# Default-Stop:   0 1 6
+# Short-Description:    AmoCRM integration daemon\
+# Description:    This runs a script continuously in screen. 
+### END INIT INFO
+
+SCREEN_PATH="/opt/amocrm/app/app.py"
+APPPID_PATH="/opt/amocrm/app/app.pid"
+SCREEN_NAME="amocrmscreen"
+DAEMON_NAME="AmoCRM integration"
+
+case "$1" in
+
+  start)
+        echo "Starting $DAEMON_NAME"
+        screen -dm -S $SCREEN_NAME $SCREEN_PATH
+        ;;
+  stop)
+        echo "Stopping $DAEMON_NAME"
+        screen -X -S $SCREEN_NAME quit
+        sleep 1
+        PID=`cat $APPPID_PATH`
+        kill -9 $PID 
+        ;;
+
+  connect)
+        screen -r $SCREEN_NAME
+        ;;
+
+  restart)
+        echo "Restarting $screen"
+        PID=`cat $APPPID_PATH`
+        kill -9 $PID 
+        sleep 1
+        screen -dm -S $SCREEN_NAME $SCREEN_PATH
+        ;;
+
+  force-reload)
+        echo "Forcing restarting $screen"
+        PID=`cat $APPPID_PATH`
+        kill -9 $PID 
+        sleep 1
+        screen -dm -S $SCREEN_NAME $SCREEN_PATH
+        ;;
+  *)
+        N=/etc/init.d/$NAME
+        echo "Usage: $N {start|stop|restart|force-reload}" >&2
+        exit 1
+        ;;
+esac
+exit 0

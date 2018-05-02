@@ -1,0 +1,11 @@
+[Unit]
+Description=Dialer Daemons
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/screen -D -S amocrmscreen -m /opt/amocrm/asterisk/bin/app.sh
+ExecStop=/usr/bin/screen -S amocrmscreen -X quit
+
+[Install]
+WantedBy=multi-user.target
